@@ -11,11 +11,11 @@ class Client(ABC):
         ...
 
     @abstractmethod
-    def factory_method(self) -> Service:
+    def create_service(self) -> Service:
         ...
 
     def run(self):
-        service = self.factory_method()
+        service = self.create_service()
         hint = self.message
         reserved_command = CLICommand.NONE
 

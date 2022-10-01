@@ -11,7 +11,7 @@ class CleanerClient(Client):
     def message(self) -> str:
         return "Welcome to Folder Cleaner App!\nEnter a full path to a directory or type 'exit': "
 
-    def factory_method(self) -> Service:
+    def create_service(self) -> Service:
         return None
 
     def run(self):
