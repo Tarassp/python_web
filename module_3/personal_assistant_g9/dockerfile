@@ -1,0 +1,6 @@
+FROM python:latest
+LABEL maintainer="Taras spasibovtaras@gmail.com"
+COPY . /app
+WORKDIR /app
+ENTRYPOINT ["python3"]
+CMD ["personal_assistant_g9/main.py"]
