@@ -6,13 +6,13 @@ import argparse
 from aiopath import AsyncPath
 import asyncio
 
-# parser = argparse.ArgumentParser(description="Sorting files")
-# parser.add_argument("--source", "-s", help="Source folder", required=True)
+parser = argparse.ArgumentParser(description="Sorting files")
+parser.add_argument("--source", "-s", help="Source folder", required=True)
 
-# args = vars(parser.parse_args())
-# source = args.get("source")
-# base_folder = AsyncPath(source)
-base_folder = AsyncPath("./clean_folder/Trash")
+args = vars(parser.parse_args())
+source = args.get("source")
+base_folder = AsyncPath(source)
+# base_folder = AsyncPath("./clean_folder/Trash")
 
 
 # To check this program:
