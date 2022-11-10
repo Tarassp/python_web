@@ -26,8 +26,13 @@ async def run_server():
 
     loop = asyncio.get_event_loop()
     while True:
-        new_socket, _ = await loop.sock_accept(server)
-        loop.create_task(handle_client(new_socket))
+        try:
+            new_socket, _ = await loop.sock_accept(server)
+            await loop.create_task(handle_client(new_socket))
+        except KeyboardInterrupt as err:
+            print(f'Destroy server: {err}')
+        finally:
+            new_socket.close()
 
 if __name__ == "__main__":
     asyncio.run(run_server())
