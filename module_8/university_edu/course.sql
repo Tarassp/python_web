@@ -1,0 +1,39 @@
+DROP TABLE IF EXISTS disciplines;
+CREATE TABLE disciplines (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name VARCHAR(100) UNIQUE NOT NULL,
+    teacher_id INTEGER,
+    FOREIGN KEY(teacher_id) REFERENCES teachers (id)
+);
+
+DROP TABLE IF EXISTS teachers;
+CREATE TABLE teachers (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    fullname VARCHAR(255) UNIQUE NOT NULL
+);
+
+DROP TABLE IF EXISTS [groups];
+CREATE TABLE [groups](
+    id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,
+    name VARCHAR(100) UNIQUE NOT NULL
+);
+
+DROP TABLE IF EXISTS grades;
+CREATE TABLE grades(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    student_id INTEGER,
+    discipline_id INTEGER,
+    date_of DATE NOT NULL,
+    grade INTEGER NOT NULL,
+    FOREIGN KEY(student_id) REFERENCES students(id),
+    FOREIGN KEY(discipline_id) REFERENCES disciplines(id)
+);
+
+DROP TABLE IF EXISTS students;
+CREATE TABLE students(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    fullname VARCHAR(255) UNIQUE NOT NULL,
+    group_id INTEGER,
+    FOREIGN KEY(group_id) REFERENCES [groups] (id)
+);
+

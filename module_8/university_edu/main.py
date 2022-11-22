@@ -1,0 +1,48 @@
+from sqlite_manager import SqliteManager
+
+
+def split(arr):
+    for item in arr:
+        print(item)
+
+
+if __name__ == "__main__":
+    db_manager = SqliteManager('course.db', 'course.sql')
+    db_manager.create_db()
+    db_manager.fill_with_fake_data()
+    print("\n5 студентів із найбільшим середнім балом з усіх предметів.")
+    split(db_manager.get_five_students_with_highest_GPA_all_subjects())
+    print("------------------------------------------------------------\n")
+    print("1 студент із найвищим середнім балом з одного предмета.")
+    split(db_manager.get_one_student_with_highest_GPA_one_subject())
+    print("------------------------------------------------------------\n")
+    print("Середній бал групи по одному предмету.")
+    split(db_manager.get_average_score_in_group_one_subject())
+    print("------------------------------------------------------------\n")
+    print("Середній бал у потоці.")
+    split(db_manager.get_average_score_in_stream())
+    print("------------------------------------------------------------\n")
+    print("Які курси читає викладач.")
+    split(db_manager.get_courses_taught_by_teacher())
+    print("------------------------------------------------------------\n")
+    print("Список студентів у групі.")
+    split(db_manager.get_list_of_students_in_group())
+    print("------------------------------------------------------------\n")
+    print("Оцінки студентів у групі з предмета.")
+    split(db_manager.get_grades_of_students_in_group_in_subject())
+    print("------------------------------------------------------------\n")
+    print("Оцінки студентів у групі на останньому занятті.")
+    split(db_manager.get_grades_of_students_in_group_in_subject_at_last_lesson())
+    print("------------------------------------------------------------\n")
+    print("Список курсів, які відвідує студент.")
+    split(db_manager.get_list_courses_student_attending())
+    print("------------------------------------------------------------\n")
+    print("Список курсів, які студенту читає викладач.")
+    split(db_manager.get_list_courses_teacher_reads_to_student())
+    print("------------------------------------------------------------\n")
+    print("Середній бал, який викладач ставить студенту.")
+    split(db_manager.get_average_score_teacher_gives_to_student())
+    print("------------------------------------------------------------\n")
+    print("Середній бал, який ставить викладач.")
+    split(db_manager.get_average_score_given_by_teacher())
+    print("------------------------------------------------------------\n")
