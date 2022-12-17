@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block css %}
+<link href="{{ url_for('static', filename='vendor/css/login.css') }}" rel="stylesheet">
+<link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min-4.0.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="container login-container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card-group mb-0">
+                <div class="card p-4">
+                    <div class="card-body">
+                        <h1>Login</h1>
+                        {% if messages %}
+                        {% for message in messages %}
+                        <div class="alert alert-danger">{{message}}: {{messages[message]}}</div>
+                        {% endfor %}
+                        {% endif %}
+                        <form action="/login" method="post">
+                            <p class="text-muted">Sign In to your account</p>
+                            <div class="input-group mb-3">
+                                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                <input type="email" name="email" class="form-control" placeholder="Email">
+                            </div>
+                            <div class="input-group mb-4">
+                                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                                <input type="password" name="password" class="form-control" placeholder="Password">
+                            </div>
+                            <div class="input-group mb-4">
+                                <label class="form-check-label text-muted">
+                                    <input type="checkbox" class="form-check-input" name="remember" />
+                                    Remember me</label>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <button type="submit" class="btn btn-primary px-4">Login</button>
+                                </div>
+                                <div class="col-6 text-right">
+                                    <a class="btn btn-link px-0" href="/registration">Don't have an account?</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
