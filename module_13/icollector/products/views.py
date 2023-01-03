@@ -3,6 +3,7 @@ from django.views.generic.list import ListView
 from django.shortcuts import HttpResponseRedirect, redirect
 from common.views import TitleMixin
 from .models import Product, ProductCategory, Basket
+from django.contrib.auth.decorators import login_required
 
 
 class IndexView(TitleMixin, TemplateView):
@@ -27,19 +28,19 @@ class ProductListView(TitleMixin, ListView):
         context['categories'] = ProductCategory.objects.all()
         return context
 
-
+@login_required
 def basket_add(request, product_id):
-    baskets = Basket.objects.filter(product_id=product_id)
+    baskets = Basket.objects.filter(user=request.user, product_id=product_id)
     if baskets.exists():
         basket = baskets.first()
         basket.quantity += 1
         basket.save()
     else:
         product = Product.objects.get(id=product_id)
-        Basket.objects.create(product=product, quantity=1)
+        Basket.objects.create(user=request.user, product=product, quantity=1)
     return redirect(request.META['HTTP_REFERER'])
 
-
+@login_required
 def basket_remove(request, basket_id):
     basket = Basket.objects.get(id=basket_id)
     basket.delete()
