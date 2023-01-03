@@ -23,3 +23,13 @@ class Product(models.Model):
 
     def __str__(self):
         return f'Product: {self.name} | Category: {self.category.name}'
+
+
+class Basket(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.SmallIntegerField(default=0)
+    created_timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'Basket id: {self.id} | Product: {self.product.name} | Quantity: {self.product.quantity}'
+
