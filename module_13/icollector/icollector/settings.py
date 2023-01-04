@@ -45,6 +45,7 @@ INSTALLED_APPS = [
 
     "products",
     "users",
+    "orders",
 ]
 
 MIDDLEWARE = [
@@ -85,8 +86,12 @@ WSGI_APPLICATION = "icollector.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": "store_db",
+        "USER": "postgres",
+        "PASSWORD": "567234",
+        "HOST": "127.0.0.1",
+        "PORT": "5432",
     }
 }
 
@@ -167,3 +172,7 @@ EMAIL_USE_SSL = True
 CELERY_BROKER_URL = 'redis://127.0.0.1:6379'
 CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379'
 
+# Stripe
+STRIPE_PUBLIC_KEY = 'pk_test_51MLjjJJqjpsSGakUeBNZPiPAWfFvtYFDdx2y3pzY4EtCRvmojjA5lqoYlILmtP73SGco9Iofu3phsvw3GdSCIoKW00T0xnsTzj'
+STRIPE_SECRET_KEY = 'sk_test_51MLjjJJqjpsSGakUb8GzlUbecbwuxL1cFrbs6xuSYvohs8m8G4CcW5GcmssNnI97E40BPQfWaldne6CWfpmAe9Tp003Xb6YH0A'
+STRIPE_WEBHOOK_SECRET='whsec_b49304d37f51ec71722218d19ec7508ba175d6261e7bcc59ab614ffe97002818'

@@ -31,6 +31,11 @@
                     <a class="nav-link" href="{% url 'products:products' %}">Catalog <i class="fas fa-shopping-bag"></i> </a>
                 </li>
                 {% if user.is_authenticated %}
+                    {% if baskets %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'users:profile' user.id %}"><i class="fas fa-shopping-cart"></i><span class='badge badge-warning' id='lblCartCount'> {{ baskets.total_quantity }} </span> </a>
+                    </li>
+                {% endif %}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                            data-bs-toggle="dropdown" aria-expanded="false">
@@ -40,7 +45,7 @@
                             <li>
                                 <a class="dropdown-item" href="{% url 'users:profile' user.id %}">Profile</a>
                             </li>
-                            <li><a class="dropdown-item" href="#">Orders</a></li>
+                            <li><a class="dropdown-item" href="{% url 'orders:orders_list' %}">Orders</a></li>
                             {% if user.is_superuser or user.is_staff %}
                                 <li><a class="dropdown-item" href="{% url 'admin:index' %}">Admin-panel</a></li>
                             {% endif %}
@@ -54,11 +59,6 @@
                             </li>
                         </ul>
                     </li>
-                    {% if baskets %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'users:profile' user.id %}"><i class="fas fa-shopping-cart"></i><span class='badge badge-warning' id='lblCartCount'> {{ baskets.total_quantity }} </span> </a>
-                        </li>
-                    {% endif %}
                 {% else %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'users:login' %}">Log in <i class="fas fa-sign-in-alt"></i></a>
