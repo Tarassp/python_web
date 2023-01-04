@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+DOMAIN_NAME = 'http://127.0.0.1:8000'
+
 
 # Application definition
 
@@ -85,6 +87,13 @@ DATABASES = {
     }
 }
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://127.0.0.1:6379',
+    }
+}
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -133,8 +142,20 @@ MEDIA_ROOT = BASE_DIR / "media"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+# Users
 AUTH_USER_MODEL = 'users.User'
-
 LOGIN_URL = '/users/login/'
 LOGOUT_REDIRECT_URL = '/'
+
+# Sending emails
+EMAIL_HOST = 'smtp.ukr.net'
+EMAIL_HOST_USER = 'icollector@ukr.net'
+EMAIL_HOST_PASSWORD = 'ZeYdRQ75pRxh0Cq8'
+EMAIL_PORT = 2525
+EMAIL_USE_SSL = True
+
+
+# Celery
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379'
+CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379'
 
