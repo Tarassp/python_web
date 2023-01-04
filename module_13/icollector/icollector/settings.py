@@ -39,7 +39,13 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sites",
     "django.contrib.humanize",
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.github',
 
     "debug_toolbar",
 
@@ -158,6 +164,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # Users
 AUTH_USER_MODEL = 'users.User'
 LOGIN_URL = '/users/login/'
+LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
 # Sending emails
@@ -176,3 +183,20 @@ CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379'
 STRIPE_PUBLIC_KEY = 'pk_test_51MLjjJJqjpsSGakUeBNZPiPAWfFvtYFDdx2y3pzY4EtCRvmojjA5lqoYlILmtP73SGco9Iofu3phsvw3GdSCIoKW00T0xnsTzj'
 STRIPE_SECRET_KEY = 'sk_test_51MLjjJJqjpsSGakUb8GzlUbecbwuxL1cFrbs6xuSYvohs8m8G4CcW5GcmssNnI97E40BPQfWaldne6CWfpmAe9Tp003Xb6YH0A'
 STRIPE_WEBHOOK_SECRET='whsec_b49304d37f51ec71722218d19ec7508ba175d6261e7bcc59ab614ffe97002818'
+
+
+# OAuth
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+SITE_ID = 1
+
+SOCIALACCOUNT_PROVIDERS = {
+    'github': {
+        'SCOPE': [
+            'user',
+        ],
+    }
+}
