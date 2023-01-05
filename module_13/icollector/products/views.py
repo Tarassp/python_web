@@ -38,7 +38,9 @@ def basket_add(request, product_id):
     else:
         product = Product.objects.get(id=product_id)
         Basket.objects.create(user=request.user, product=product, quantity=1)
-    return redirect(request.META['HTTP_REFERER'])
+    if request.META.get('HTTP_REFERER'):
+        return redirect(request.META['HTTP_REFERER'])
+    return redirect(to="products:products")
 
 @login_required
 def basket_remove(request, basket_id):
