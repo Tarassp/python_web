@@ -6,6 +6,7 @@
 
 # useful for handling different item types with a single interface
 from itemadapter import ItemAdapter
+from datetime import datetime
 from .models import db_connect, create_tables, Quote, Tag, Author
 from sqlalchemy.orm import Session
 
@@ -19,7 +20,7 @@ class AuthorsPipeline:
     def process_item(self, item, spider):
         author = Author()
         author.name = item['name']
-        author.birthdate = item['birthdate']
+        author.birthdate = datetime.strptime(item['birthdate'], "%B %d, %Y").date()
         author.bio = item['bio']
 
         try:

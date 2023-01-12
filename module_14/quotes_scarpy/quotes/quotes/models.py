@@ -1,7 +1,8 @@
 from __future__ import annotations
-from sqlalchemy import create_engine, String, Text, ForeignKey, Table, Column
+from sqlalchemy import create_engine, String, Text, ForeignKey, Table, Column, Date
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 from scrapy.utils.project import get_project_settings
+from datetime import date
 
 
 class Base(DeclarativeBase):
@@ -21,7 +22,7 @@ class Author(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(String(100), unique=True)
-    birthdate: Mapped[str] = mapped_column(String(20))
+    birthdate: Mapped[date] = mapped_column(Date)
     bio: Mapped[str] = mapped_column(Text)
     quotes: Mapped[list["Quote"]] = relationship(back_populates="author")
 
