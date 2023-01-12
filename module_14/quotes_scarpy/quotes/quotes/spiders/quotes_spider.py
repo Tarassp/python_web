@@ -18,7 +18,7 @@ class QuotesSpider(scrapy.Spider):
     def parse(self, response):
         for quote in response.css('div.quote'):
             item = QuoteItem()
-            item['text'] = quote.css('span.text::text').get()
+            item['text'] = quote.css('span.text::text').get()[1:-1]
             item['author'] = quote.css('small.author::text').get()
             item['tags'] = quote.css('div.tags a.tag::text').getall()
             yield item
